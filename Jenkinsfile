@@ -7,11 +7,12 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Waseema761/hiring-app.git'
-            }
-        }
+      stage('Checkout') {
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/Waseema761/hiring-app.git'
+    }
+}
 
         stage('Build') {
             steps {
