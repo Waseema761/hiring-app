@@ -1,13 +1,16 @@
-FROM tomcat:8.0.20-jre8
-# Define environment variables for Nexus repository and the artifact to download
-ENV NEXUS_REPO_URL="http://18.218.72.148:8081/repository/hiring-app/"
-ENV ARTIFACT_PATH="junit/hiring/0.1/hiring-0.1.war"
+FROM tomcat:8.5-jdk8-temurin
 
-# Download the WAR file from Nexus and copy it to the Tomcat webapps directory
-ADD $NEXUS_REPO_URL$ARTIFACT_PATH /usr/local/tomcat/webapps/hiring.war
+# Install curl
+RUN apt-get update && apt-get install -y curl
 
-# Expose port 8080 (Tomcat's default port)
+# Nexus details
+ENV NEXUS_URL=http://18.218.72.148:8081
+ENV ARTIFACT_PATH=/repository/hiring-app/in/javahome/hiring/0.1/hiring-0.1.war
+
+# Download WAR from Nexus
+RUN curl -o /usr/local/tomcat/webapps/ROOT.war \
+    $NEXUS_URL$ARTIFACT_PATH
+
 EXPOSE 8080
 
-# Start Tomcat
 CMD ["catalina.sh", "run"]
