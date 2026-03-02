@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        IMAGE_NAME = "waseema761/hiring-app"
+        IMAGE_NAME = "waseem08/hiring-app"
         IMAGE_TAG  = "${BUILD_NUMBER}"
     }
 
